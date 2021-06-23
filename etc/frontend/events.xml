@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_controller_category_init_after">
+        <observer name="klevu_registry_registerCurrentCategory" instance="Klevu\Registry\Observer\RegisterCurrentCategoryObserver"/>
+    </event>
+
+    <event name="catalog_controller_product_init_after">
+        <observer name="klevu_registry_registerCurrentProduct" instance="Klevu\Registry\Observer\RegisterCurrentProductObserver"/>
+    </event>
+</config>

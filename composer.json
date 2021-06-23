@@ -1,0 +1,22 @@
+{
+    "name": "klevu/registry",
+    "description": "Replacement for deprecated core registry class",
+    "require": {
+        "magento/framework": "@stable",
+        "magento/module-catalog": "@stable",
+        "magento/module-store": "@stable"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Klevu\\Registry\\": ""
+        }
+    }
+}
