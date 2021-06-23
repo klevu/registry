@@ -1,5 +1,5 @@
 {
-    "name": "klevu/registry",
+    "name": "klevu/module-registry",
     "description": "Replacement for deprecated core registry class",
     "require": {
         "magento/framework": "@stable",
