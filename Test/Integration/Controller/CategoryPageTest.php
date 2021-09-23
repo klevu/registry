@@ -72,7 +72,7 @@ class CategoryPageTest extends AbstractControllerTestCase
         /** @var CategoryRegistryInterface $categoryRegistry */
         $categoryRegistry = $this->objectManager->get(CategoryRegistryInterface::class);
 
-        $this->dispatch('catalog/category/view/id/99999');
+        $this->dispatch('catalog/category/view/id/0');
 
         $this->assert404NotFound();
 
