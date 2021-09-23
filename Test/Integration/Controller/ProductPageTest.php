@@ -39,6 +39,7 @@ class ProductPageTest extends AbstractControllerTestCase
      * @magentoAppArea frontend
      * @magentoCache all disabled
      * @magentoAppIsolation enabled
+     * @magentoDbIsolation disabled
      * @magentoDataFixture loadProductFixtures
      */
     public function testRegistryValuesOnEnabledProduct()
@@ -70,6 +71,7 @@ class ProductPageTest extends AbstractControllerTestCase
      * @magentoAppArea frontend
      * @magentoCache all disabled
      * @magentoAppIsolation enabled
+     * @magentoDbIsolation disabled
      * @magentoDataFixture loadProductFixtures
      */
     public function testRegistryValuesOn404NotFound()
@@ -96,6 +98,7 @@ class ProductPageTest extends AbstractControllerTestCase
      * @magentoAppArea frontend
      * @magentoCache all disabled
      * @magentoAppIsolation enabled
+     * @magentoDbIsolation disabled
      * @magentoDataFixture loadProductFixtures
      */
     public function testRegistryValuesOnDisabledProduct()
@@ -158,11 +161,29 @@ class ProductPageTest extends AbstractControllerTestCase
     }
 
     /**
-     * Rolls back creation scripts because annotations use a relative path
+     * Rolls back product creation scripts because annotations use a relative path
+     *  from integration tests root
+     */
+    public static function loadProductFixturesRollback()
+    {
+        include __DIR__ . '/../_files/productFixtures_rollback.php';
+    }
+
+    /**
+     * Loads category creation scripts because annotations use a relative path
+     *  from integration tests root
+     */
+    public static function loadCategoryFixtures()
+    {
+        include __DIR__ . '/../_files/categoryFixtures.php';
+    }
+
+    /**
+     * Rolls back category creation scripts because annotations use a relative path
      *  from integration tests root
      */
     public static function loadCategoryFixturesRollback()
     {
-        include __DIR__ . '/../_files/productFixtures_rollback.php';
+        include __DIR__ . '/../_files/categoryFixtures_rollback.php';
     }
 }

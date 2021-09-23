@@ -1,13 +1,17 @@
 <?php
 
+use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Model\ResourceModel\Category\Collection as CategoryCollection;
 use Magento\Framework\Registry;
 use Magento\TestFramework\Helper\Bootstrap;
+use Magento\UrlRewrite\Model\ResourceModel\UrlRewriteCollection;
+use Magento\UrlRewrite\Model\ResourceModel\UrlRewriteCollectionFactory;
+use Magento\UrlRewrite\Model\UrlRewrite;
 
-$pathsToDelete = [
-    '1/2/3',
-    '1/2/4',
-];
+$objectManager = Bootstrap::getObjectManager();
+/** @var CategoryRepositoryInterface $categoryRepository */
+$categoryRepository = $objectManager->get(CategoryRepositoryInterface::class);
+$urlRewriteCollectionFactory = $objectManager->get(UrlRewriteCollectionFactory::class);
 
 $objectManager = Bootstrap::getObjectManager();
 
@@ -17,9 +21,19 @@ $registry->unregister('isSecureArea');
 $registry->register('isSecureArea', true);
 
 $collection = $objectManager->create(CategoryCollection::class);
-$collection->addAttributeToFilter('path', ['in' => $pathsToDelete]);
-$collection->load();
-$collection->delete();
+$collection->addAttributeToFilter('name', ['like' => '%[Klevu Test Fixtures]%']);
+foreach ($collection as $category) {
+    $categoryRepository->delete($category);
+}
+
+/** @var UrlRewriteCollection $urlRewriteCollection */
+$urlRewriteCollection = $urlRewriteCollectionFactory->create();
+$urlRewriteCollection->addFieldToFilter('entity_type', 'category');
+$urlRewriteCollection->addFieldToFilter('request_path', ['like' => 'klevu-test-category-%']);
+foreach ($urlRewriteCollection as $urlRewrite) {
+    /** @var UrlRewrite $urlRewrite */
+    $urlRewrite->delete();
+}
 
 $registry->unregister('isSecureArea');
 $registry->register('isSecureArea', false);

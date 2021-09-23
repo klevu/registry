@@ -1,6 +1,5 @@
 <?php
 
-use Magento\Catalog\Model\Product;
 use Magento\Framework\Registry;
 use Magento\TestFramework\Helper\Bootstrap;
 
@@ -16,11 +15,15 @@ $registry = $objectManager->get(Registry::class);
 $registry->unregister('isSecureArea');
 $registry->register('isSecureArea', true);
 
+/** @var Magento\Catalog\Api\ProductRepositoryInterface $productRepository */
+$productRepository = $objectManager->get(\Magento\Catalog\Api\ProductRepositoryInterface::class);
 foreach ($skusToDelete as $sku) {
-    $product = $objectManager->create(Product::class);
-    $product->load($sku, 'sku');
-    if ($product->getId()) {
-        $product->delete();
+    try {
+        $productRepository->delete(
+            $productRepository->get($sku)
+        );
+    } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
+        // this is fine
     }
 }
 

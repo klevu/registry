@@ -7,6 +7,8 @@ use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\Catalog\Model\Product\Visibility;
 
+include __DIR__ . '/productFixtures_rollback.php';
+
 $objectManager = Bootstrap::getObjectManager();
 
 /** @var StoreManagerInterface $storeManager */
