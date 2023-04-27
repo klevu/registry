@@ -2,13 +2,13 @@
     "name": "klevu/module-registry",
     "description": "Replacement for deprecated core registry class",
     "require": {
-        "php": "~5.6.0|~7.0.0|~7.1.0|~7.2.0|~7.3.0|~7.4.0|~8.0.0|~8.1.0",
+        "php": "~5.6.0|~7.0.0|~7.1.0|~7.2.0|~7.3.0|~7.4.0|~8.0.0|~8.1.0|~8.2.0",
         "magento/framework": "@stable",
         "magento/module-catalog": "@stable",
         "magento/module-store": "@stable"
     },
     "type": "magento2-module",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "license": [
         "proprietary"
     ],
